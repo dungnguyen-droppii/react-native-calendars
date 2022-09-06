@@ -120,8 +120,8 @@ const CalendarHeader = forwardRef((props: CalendarHeaderProps, ref) => {
   }, [numberOfDays]);
   const style = useRef(styleConstructor(theme));
   const headerStyle = useMemo(() => {
-    return [style.current.header, numberOfDaysCondition ? style.current.partialHeader : undefined, headerContentStyle];
-  }, [numberOfDaysCondition, headerContentStyle]);
+    return [style.current.header, numberOfDaysCondition ? style.current.partialHeader : undefined];
+  }, [numberOfDaysCondition]);
   const partialWeekStyle = useMemo(() => {
     return [style.current.partialWeek, {paddingLeft: timelineLeftInset}];
   }, [timelineLeftInset]);
@@ -296,7 +296,7 @@ const CalendarHeader = forwardRef((props: CalendarHeaderProps, ref) => {
       accessibilityElementsHidden={accessibilityElementsHidden} // iOS
       importantForAccessibility={importantForAccessibility} // Android
     >
-      <View style={headerStyle}>
+      <View style={[headerStyle, headerContentStyle]}>
         {_renderArrow('left')}
         <View style={style.current.headerContainer}>
           {_renderHeader()}
