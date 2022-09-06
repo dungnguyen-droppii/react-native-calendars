@@ -76,7 +76,6 @@ export interface CalendarHeaderProps {
   current?: string;
   /** Left inset for the timeline calendar header, default is 72 */
   timelineLeftInset?: number;
-  headerContentStyle?: StyleProp<ViewStyle>
 }
 
 const accessibilityActions = [
@@ -111,8 +110,7 @@ const CalendarHeader = forwardRef((props: CalendarHeaderProps, ref) => {
     importantForAccessibility,
     numberOfDays,
     current = '',
-    timelineLeftInset,
-    headerContentStyle
+    timelineLeftInset
   } = props;
   
   const numberOfDaysCondition = useMemo(() => {
@@ -296,7 +294,7 @@ const CalendarHeader = forwardRef((props: CalendarHeaderProps, ref) => {
       accessibilityElementsHidden={accessibilityElementsHidden} // iOS
       importantForAccessibility={importantForAccessibility} // Android
     >
-      <View style={[headerStyle, headerContentStyle]}>
+      <View style={headerStyle}>
         {_renderArrow('left')}
         <View style={style.current.headerContainer}>
           {_renderHeader()}
