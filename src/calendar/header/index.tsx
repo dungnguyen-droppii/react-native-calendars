@@ -76,6 +76,7 @@ export interface CalendarHeaderProps {
   current?: string;
   /** Left inset for the timeline calendar header, default is 72 */
   timelineLeftInset?: number;
+  headerContentStyle?: StyleProp<ViewStyle>
 }
 
 const accessibilityActions = [
@@ -110,7 +111,8 @@ const CalendarHeader = forwardRef((props: CalendarHeaderProps, ref) => {
     importantForAccessibility,
     numberOfDays,
     current = '',
-    timelineLeftInset
+    timelineLeftInset,
+    headerContentStyle
   } = props;
   
   const numberOfDaysCondition = useMemo(() => {
@@ -118,8 +120,8 @@ const CalendarHeader = forwardRef((props: CalendarHeaderProps, ref) => {
   }, [numberOfDays]);
   const style = useRef(styleConstructor(theme));
   const headerStyle = useMemo(() => {
-    return [style.current.header, numberOfDaysCondition ? style.current.partialHeader : undefined];
-  }, [numberOfDaysCondition]);
+    return [style.current.header, numberOfDaysCondition ? style.current.partialHeader : undefined, headerContentStyle];
+  }, [numberOfDaysCondition, headerContentStyle]);
   const partialWeekStyle = useMemo(() => {
     return [style.current.partialWeek, {paddingLeft: timelineLeftInset}];
   }, [timelineLeftInset]);
